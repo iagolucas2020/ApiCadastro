@@ -41,7 +41,7 @@ namespace Cadastro
 
             services.AddScoped<CadastroContext>();
             services.AddScoped<PessoaFisicaService>();
-            services.AddScoped<CidadeService>();
+            services.AddScoped<EnderecoService>();
             services.AddScoped<TelefoneService>();
         }
 

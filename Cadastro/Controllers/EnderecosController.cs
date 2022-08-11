@@ -14,7 +14,7 @@ namespace Cadastro.Controllers
     public class CidadesController : Controller
     {
         private readonly CadastroContext _context;
-        private readonly CidadeService _cidade;
+        private readonly EnderecoService _cidade;
 
 
 

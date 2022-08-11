@@ -16,7 +16,7 @@ namespace Cadastro.Data
 
         public DbSet<PessoaFisica> PessoaFisica { get; set; }
         public DbSet<PessoaJuridica> PessoaJuridica { get; set; }
-        public DbSet<Cadastro.Models.Cidade> Cidade { get; set; }
-        public DbSet<Cadastro.Models.Telefone> Telefone { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Telefone> Telefone { get; set; }
     }
 }

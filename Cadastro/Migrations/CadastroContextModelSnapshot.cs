@@ -19,25 +19,7 @@ namespace Cadastro.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Cadastro.Models.Cidade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UF")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cidade");
-                });
-
-            modelBuilder.Entity("Cadastro.Models.PessoaFisica", b =>
+            modelBuilder.Entity("Cadastro.Models.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,24 +32,46 @@ namespace Cadastro.Migrations
                     b.Property<string>("Cep")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CidadeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
+                    b.Property<string>("Cidade")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logradouro")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("UF")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CidadeId");
+                    b.ToTable("Endereco");
+                });
+
+            modelBuilder.Entity("Cadastro.Models.PessoaFisica", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EnderecoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("PessoaFisica");
                 });
@@ -79,30 +83,25 @@ namespace Cadastro.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Bairro")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cep")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CidadeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Cnpj")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Logradouro")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EnderecoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Razao")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CidadeId");
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("PessoaJuridica");
                 });
@@ -115,6 +114,7 @@ namespace Cadastro.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PessoaFisicaId")
@@ -140,24 +140,24 @@ namespace Cadastro.Migrations
 
             modelBuilder.Entity("Cadastro.Models.PessoaFisica", b =>
                 {
-                    b.HasOne("Cadastro.Models.Cidade", "Cidade")
+                    b.HasOne("Cadastro.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("CidadeId")
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cidade");
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("Cadastro.Models.PessoaJuridica", b =>
                 {
-                    b.HasOne("Cadastro.Models.Cidade", "Cidade")
+                    b.HasOne("Cadastro.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("CidadeId")
+                        .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cidade");
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("Cadastro.Models.Telefone", b =>

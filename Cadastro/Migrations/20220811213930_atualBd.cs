@@ -2,7 +2,7 @@
 
 namespace Cadastro.Migrations
 {
-    public partial class atualizandoDataBase2 : Migration
+    public partial class atualBd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
