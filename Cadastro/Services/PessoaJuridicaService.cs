@@ -1,26 +1,26 @@
 ﻿using Cadastro.Data;
 using Cadastro.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cadastro.Services
 {
-    public class PessoaFisicaService
+    public class PessoaJuridicaService
     {
         private readonly CadastroContext _context;
 
-        public PessoaFisicaService(CadastroContext context)
+        public PessoaJuridicaService(CadastroContext context)
         {
             _context = context;
         }
-        public async Task<List<PessoaFisica>> GetAllAsync()
+        public async Task<List<PessoaJuridica>> GetAllAsync()
         {
             try
             {
-                return await _context.PessoaFisica
+                return await _context.PessoaJuridica
                     .Include(x => x.Endereco)
                     .Include(x => x.Telefones)
                     .ToListAsync(); ;
@@ -31,11 +31,11 @@ namespace Cadastro.Services
             }
 
         }
-        public async Task<PessoaFisica> GetByIdAsync(int id)
+        public async Task<PessoaJuridica> GetByIdAsync(int id)
         {
             try
             {
-                return await _context.PessoaFisica
+                return await _context.PessoaJuridica
                     .Include(x => x.Endereco)
                     .Include(x => x.Telefones)
                     .FirstOrDefaultAsync(x => x.Id == id);
@@ -45,13 +45,13 @@ namespace Cadastro.Services
                 throw new Exception(e.Message);
             }
         }
-        public async Task<PessoaFisica> Post(PessoaFisica pessoaFisica)
+        public async Task<PessoaJuridica> Post(PessoaJuridica pessoaJuridica)
         {
             try
             {
-                _context.PessoaFisica.Add(pessoaFisica);
+                _context.PessoaJuridica.Add(pessoaJuridica);
                 await _context.SaveChangesAsync();
-                return pessoaFisica;
+                return pessoaJuridica;
             }
             catch (Exception e)
             {
@@ -59,18 +59,18 @@ namespace Cadastro.Services
             }
 
         }
-        public async Task<PessoaFisica> Put(PessoaFisica pessoaFisica)
+        public async Task<PessoaJuridica> Put(PessoaJuridica pessoaJuridica)
         {
-            bool hasAny = await _context.PessoaFisica.AnyAsync(x => x.Id == pessoaFisica.Id);
+            bool hasAny = await _context.PessoaJuridica.AnyAsync(x => x.Id == pessoaJuridica.Id);
             if (!hasAny)
             {
                 throw new Exception("Id NotFound");
             }
             try
             {
-                _context.Entry(pessoaFisica).State = EntityState.Modified;
+                _context.Entry(pessoaJuridica).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return pessoaFisica;
+                return pessoaJuridica;
             }
             catch (Exception e)
             {
@@ -82,11 +82,11 @@ namespace Cadastro.Services
         {
             try
             {
-                var pessoaFisica = await _context.PessoaFisica
+                var pessoaJuridica = await _context.PessoaJuridica
                     .Include(x => x.Endereco)
                     .Include(x => x.Telefones)
                     .FirstOrDefaultAsync(x => x.Id == id);
-                _context.PessoaFisica.Remove(pessoaFisica);
+                _context.PessoaJuridica.Remove(pessoaJuridica);
                 await _context.SaveChangesAsync();
             }
             catch (Exception e)

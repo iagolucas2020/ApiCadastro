@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iagol\\Desktop\\Trib\\Cadastro\\Cadastro\\Cadastro.csproj": {}
+    "C:\\Users\\iagol\\Desktop\\Trib1\\Cadastro\\Cadastro\\Cadastro.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iagol\\Desktop\\Trib\\Cadastro\\Cadastro\\Cadastro.csproj": {
+    "C:\\Users\\iagol\\Desktop\\Trib1\\Cadastro\\Cadastro\\Cadastro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iagol\\Desktop\\Trib\\Cadastro\\Cadastro\\Cadastro.csproj",
+        "projectUniqueName": "C:\\Users\\iagol\\Desktop\\Trib1\\Cadastro\\Cadastro\\Cadastro.csproj",
         "projectName": "Cadastro",
-        "projectPath": "C:\\Users\\iagol\\Desktop\\Trib\\Cadastro\\Cadastro\\Cadastro.csproj",
+        "projectPath": "C:\\Users\\iagol\\Desktop\\Trib1\\Cadastro\\Cadastro\\Cadastro.csproj",
         "packagesPath": "C:\\Users\\iagol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iagol\\Desktop\\Trib\\Cadastro\\Cadastro\\obj\\",
+        "outputPath": "C:\\Users\\iagol\\Desktop\\Trib1\\Cadastro\\Cadastro\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

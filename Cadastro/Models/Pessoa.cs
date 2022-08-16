@@ -38,15 +38,15 @@ namespace Cadastro.Models
             Telefones.Add(telefone);
         }
 
-        public async Task ConsultarEndereco(PessoaFisica pessoa)
+        public async Task ConsultarEndereco(Endereco endereco)
         {
-            string cep = pessoa.Endereco.Cep.Replace(".", "").Replace("-", "");
+            string cep = endereco.Cep.Replace(".", "").Replace("-", "");
             string link = $"https://viacep.com.br/ws/{cep}/json/";
             var result = await link.GetJsonAsync<PessoaViewModels>();
-            pessoa.Endereco.Logradouro = result.logradouro;
-            pessoa.Endereco.Bairro = result.bairro;
-            pessoa.Endereco.Cidade = result.localidade;
-            pessoa.Endereco.UF = result.uf;
+            endereco.Logradouro = result.logradouro;
+            endereco.Bairro = result.bairro;
+            endereco.Cidade = result.localidade;
+            endereco.UF = result.uf;
         }
 
     }

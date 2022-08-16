@@ -9,7 +9,7 @@ namespace Cadastro.Data
 {
     public class CadastroContext : DbContext
     {
-        public CadastroContext (DbContextOptions<CadastroContext> options)
+        public CadastroContext(DbContextOptions<CadastroContext> options)
             : base(options)
         {
         }
@@ -18,5 +18,6 @@ namespace Cadastro.Data
         public DbSet<PessoaJuridica> PessoaJuridica { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Telefone> Telefone { get; set; }
+
     }
 }

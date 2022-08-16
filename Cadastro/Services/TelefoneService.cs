@@ -1,6 +1,7 @@
 ﻿using Cadastro.Data;
 using Cadastro.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,12 +27,36 @@ namespace Cadastro.Services
 
         public async Task<List<Telefone>> PutTelefone(List<Telefone> telefones)
         {
-            foreach (var item in telefones)
+            try
             {
-                _context.Entry(item).State = EntityState.Modified;
+                foreach (var item in telefones)
+                {
+                    _context.Entry(item).State = EntityState.Modified;
+                }
+                await _context.SaveChangesAsync();
+                return telefones;
             }
-            await _context.SaveChangesAsync();
-            return telefones;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+   
+        }
+
+        public async Task DeleteTelefone(List<Telefone> telefones)
+        {
+            try
+            {
+                foreach (var item in telefones)
+                {
+                    _context.Telefone.Remove(item);
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

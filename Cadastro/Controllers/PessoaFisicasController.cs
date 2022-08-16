@@ -35,7 +35,7 @@ namespace Cadastro.Controllers
         {
             try
             {
-                var dados = await _pessoaFisica.FindAllAsync();
+                var dados = await _pessoaFisica.GetAllAsync();
                 if (dados.Count == 0) return NotFound("Dados não encontrados");
                 return Ok(dados);
             }
@@ -51,7 +51,7 @@ namespace Cadastro.Controllers
         {
             try
             {
-                var pessoaFisica = await _pessoaFisica.FindByIdAsync(id);
+                var pessoaFisica = await _pessoaFisica.GetByIdAsync(id);
                 if (pessoaFisica == null)
                 {
                     return NotFound("Pessoa não existe!");
@@ -78,7 +78,7 @@ namespace Cadastro.Controllers
                 if (!cpf) return BadRequest("Cpf Inválido");
 
                 //Consultar endereço Via CEP
-                await pessoa.ConsultarEndereco(pessoaFisica);
+                await pessoa.ConsultarEndereco(pessoaFisica.Endereco);
 
                 //Save Endereco
                 await _endereco.PostEndereco(pessoaFisica.Endereco);
@@ -108,8 +108,8 @@ namespace Cadastro.Controllers
             try
             {
                 //Consultar endereço Via CEP
-                if(pessoaFisica.Endereco.Cep != null) await pessoaFisica.ConsultarEndereco(pessoaFisica);
-
+                if (pessoaFisica.Endereco.Cep != null)  await pessoaFisica.ConsultarEndereco(pessoaFisica.Endereco);
+               
                 //Update Endereco
                 await _endereco.PutEndereco(pessoaFisica.Endereco);
 
@@ -138,16 +138,22 @@ namespace Cadastro.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePessoaFisica(int id)
         {
-            var pessoaFisica = await _context.PessoaFisica.FindAsync(id);
-            if (pessoaFisica == null)
+            try
+            {
+                var pessoaFisica = await _pessoaFisica.GetByIdAsync(id);
+                if (pessoaFisica == null)
+                {
+                    return NotFound();
+                }
+                await _pessoaFisica.Delete(id);
+                await _endereco.Delete(pessoaFisica.Endereco);
+                await _telefone.DeleteTelefone(pessoaFisica.Telefones);
+                return NoContent();
+            }
+            catch (Exception)
             {
                 return NotFound();
             }
-
-            _context.PessoaFisica.Remove(pessoaFisica);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool PessoaFisicaExists(int id)
